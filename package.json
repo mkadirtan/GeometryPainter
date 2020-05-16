@@ -1,0 +1,32 @@
+{
+  "name": "geometry-painter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "private": true,
+  "scripts": {
+    "build": "webpack --config webpack.config.js --mode production",
+    "dev": "webpack-dev-server --open",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^4.3.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "@babylonjs/core": "^4.1.0",
+    "@babylonjs/gui": "^4.1.0",
+    "@babylonjs/inspector": "^4.1.0",
+    "@babylonjs/loaders": "^4.1.0",
+    "@babylonjs/materials": "^4.1.0",
+    "@babylonjs/post-processes": "^4.1.0",
+    "@babylonjs/procedural-textures": "^4.1.0",
+    "@babylonjs/serializers": "^4.1.0",
+    "babel-minify-webpack-plugin": "^0.3.1"
+  }
+}
