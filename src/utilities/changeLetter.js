@@ -3,6 +3,7 @@ import { Mesh, PlaneBuilder, TransformNode } from "@babylonjs/core";
 
 import manager from "../gui3D/manager";
 import drawText from "./drawText";
+import { letterToggleObservable } from "../gui2D/letterToggleButton";
 
 function changeLetter(letterPlane, newLetter){
     let texture = letterPlane.material.diffuseTexture;
@@ -30,8 +31,12 @@ leftPlane.billboardMode = TransformNode.BILLBOARDMODE_ALL;
 let leftButton = new MeshButton3D(leftPlane, "leftButton");
 manager.addControl(leftButton);
 
-rightButton.isVisible = false;
-leftButton.isVisible = false;
+letterToggleObservable.add(e=>{
+    rightButton.isVisible = !!e;
+    leftButton.isVisible = !!e;
+})
+//Start deactivated;
+deactivateLetterChangeButtons();
 
 export function deactivateLetterChangeButtons(){
     rightButton.isVisible = false;

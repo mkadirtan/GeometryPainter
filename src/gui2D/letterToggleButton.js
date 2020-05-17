@@ -3,8 +3,10 @@ import letterToggleImage from "../../media/images/firefox.png";
 import { rightPanel } from "./rightPanel";
 import { Observable } from "@babylonjs/core";
 
-export let letterToggleObservable = new Observable();
 let isLettersActive = true;
+export let letterToggleObservable = new Observable(o=>{
+    letterToggleObservable.notifyObserver(o, isLettersActive)
+});
 
 export function letterToggleButton(){
     return customButton({
