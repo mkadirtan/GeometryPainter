@@ -4,15 +4,15 @@ import customButton from "../gui2D/customButton";
 import gizmoToggleImage from "../../media/images/gizmoToggleImage.png"
 import { leftPanel } from "../gui2D/leftPanel";
 
-export let gizmoManager = new GizmoManager(scene);
+let gizmoManager = new GizmoManager(scene);
 gizmoManager.scaleGizmoEnabled = true;
 
-/*scene.onNewMeshAddedObservable.add(m=>{
+export function attachGizmoToModel(model){
     if(!gizmoManager.attachableMeshes){
         gizmoManager.attachableMeshes = []
     }
-    gizmoManager.attachableMeshes.push(m);
-})*/
+    gizmoManager.attachableMeshes.push(model);
+}
 
 customButton({
     name: "gizmoToggle",
