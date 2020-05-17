@@ -8,7 +8,12 @@ function createScene(){
     let scene = new Scene(engine);
     scene.clearColor = new Color4(0.75,0.75,0.75, 1);
 
-    let camera = new ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, Vector3.Zero(), scene);
+    let camera = new ArcRotateCamera("camera", Math.PI/2, Math.PI/2, 6, Vector3.Zero(), scene);
+    camera.wheelPrecision = 24;
+    camera.speed = 1
+    camera.angularSensibilityX = 2000;
+    camera.angularSensibilityY = 2000;
+    //camera.useNaturalPinchZoom = true todo akıllı tahta için kontrol et.
     camera.attachControl(canvas, true);
 
     let directionalLight = new DirectionalLight("directionalLight", new Vector3(2,-3,8), scene);
@@ -29,6 +34,7 @@ function createScene(){
 }
 
 export let scene = createScene();
+window.scene = scene;
 
 engine.runRenderLoop(function(){
     scene.render();
