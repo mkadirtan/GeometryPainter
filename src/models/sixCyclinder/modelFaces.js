@@ -1,26 +1,34 @@
-let top = [];
-let side = [];
-let bot = [];
-let sides = 6;
-
-for(let i = 0; i < sides ; i++){
-    top.push(i+(sides*3));
-    bot.push(i+(sides*2));
-    side.push(i+sides);
-    side.push(i);
-}
-
 export default [
     {
         id: 0,
-        idList: bot
+        idList: [0,1]
     },
     {
         id: 1,
-        idList: side
+        idList: [2,3]
     },
     {
         id: 2,
-        idList: top
+        idList: [4,5]
+    },
+    {
+        id: 3,
+        idList: [6,7]
+    },
+    {
+        id: 4,
+        idList: [8,9]
+    },
+    {
+        id: 5,
+        idList: [10, 11]
+    },
+    {
+        id: 6,
+        idList: [12, 13, 14, 15]
+    },
+    {
+        id: 7,
+        idList: [16, 17, 18, 19]
     }
 ]

@@ -3,7 +3,7 @@ import {scene} from "../../scene";
 import {PolyhedronBuilder} from "@babylonjs/core";
 import modelFaces from "./modelFaces";
 import modelLetters from "./modelLetters";
-import { faces, vertex } from "./modelGeometry";
+import {faces, vertex} from "./modelGeometry";
 import modelTemplate from "../modelTemplate";
 
 let _vertex = [];
@@ -14,10 +14,11 @@ for(let i = 0; i<vertex.length; i++){
     _vertex.push(newPosition);
 }
 
+
 function builderFunction(faceColors){
-    return PolyhedronBuilder.CreatePolyhedron("sixCyclinder", {
+    return PolyhedronBuilder.CreatePolyhedron("threeCyclinder", {
         custom: {
-            name: "sixCyclinder",
+            name: "threeCyclinder",
             category: ["Muhammed Solids"],
             vertex: _vertex,
             face: faces
@@ -29,6 +30,6 @@ function builderFunction(faceColors){
 let model = new modelTemplate();
 
 export default function() {
-    model.init(8, modelLetters, modelFaces, builderFunction);
+    model.init(5, modelLetters, modelFaces, builderFunction);
     return model;
 }

@@ -16,6 +16,7 @@ import { sixCyclinderButton } from "./gui2D/buttons/modelButtons/sixCyclinderBut
 import { threePyramidButton } from "./gui2D/buttons/modelButtons/threePyramidButton";
 import { fourPyramidButton } from "./gui2D/buttons/modelButtons/fourPyramidButton";
 import { fivePyramidButton } from "./gui2D/buttons/modelButtons/fivePyramidButton";
+import { threeCyclinderButton } from "./gui2D/buttons/modelButtons/threeCyclinderButton";
 // Run button commands in the order you want them to appear.
 //gizmoToggleButton();
 edgesToggleButton();
@@ -29,7 +30,7 @@ fiveCyclinderButton();
 sixCyclinderButton();
 cyclinderButton();
 coneButton();
+fivePyramidButton();
 threePyramidButton();
 fourPyramidButton();
-fivePyramidButton();
-//squarePyramid();
+threeCyclinderButton();

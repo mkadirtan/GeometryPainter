@@ -1,4 +1,4 @@
-import { VertexBuffer } from "@babylonjs/core";
+import { Mesh, VertexBuffer } from "@babylonjs/core";
 
 import modelConfig from "./models.config";
 import { addLetters } from "../utilities/letter";
@@ -25,7 +25,7 @@ export default function() {
 
         this.newMeshWithFaceColors = builderFunction
         this.mesh = this.newMeshWithFaceColors(this.defaultFaceColors);
-
+        this.mesh.sideOrientation = Mesh.DOUBLESIDE;
         this.letters = modelLetters;
         this.faces = modelFaces;
         activeModelObservable.notifyObservers(this);
