@@ -31,6 +31,8 @@ export default function(param){
         result.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
     } else if(param.stack.name === "rightPanel") {
         result.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT;
+    } else {
+        result.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_CENTER
     }
 
     param.stack.addControl(result);

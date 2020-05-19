@@ -1,15 +1,17 @@
 import { scene } from "../../scene";
 
-import { BoxBuilder } from "@babylonjs/core";
+import { CylinderBuilder } from "@babylonjs/core";
 import modelFaces from "./modelFaces";
 import modelLetters from "./modelLetters";
 import modelTemplate from "../modelTemplate";
 
 function builderFunction(faceColors){
-    return BoxBuilder.CreateBox("box", {
-        width: 0.6,
-        depth: 1.2,
+    return CylinderBuilder.CreateCylinder("cone", {
         height: 1,
+        diameterTop: 1,
+        diameterBottom: 1,
+        tessellation: 32,
+        subdivisions: 1,
         faceColors: faceColors,
     }, scene);
 }
@@ -17,6 +19,6 @@ function builderFunction(faceColors){
 let model = new modelTemplate();
 
 export default function() {
-    model.init(6, modelLetters, modelFaces, builderFunction);
+    model.init(3, modelLetters, modelFaces, builderFunction);
     return model;
 }

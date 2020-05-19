@@ -1,9 +1,5 @@
 export default [
     {
-        id: 0,
-        idList: [0]
-    },
-    {
         id: 1,
         idList: [1]
     },
@@ -16,7 +12,7 @@ export default [
         idList: [3]
     },
     {
-        id: 4,
-        idList: [4, 5]
-    },
+        id: 0,
+        idList: [0]
+    }
 ]

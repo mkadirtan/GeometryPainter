@@ -21,6 +21,7 @@ scene.onPointerDown = (e, p) => {
 scene.onPointerPick = (e, p) => {
     if(activeModel === undefined) return;
     if(p.pickedMesh === activeModel.mesh){
+        console.log(p.faceId);
         const detectedFace = activeModel.faceDetector(p.faceId);
         if(detectedFace < 0) return;
         selectedFaceObservable.notifyObservers(detectedFace);

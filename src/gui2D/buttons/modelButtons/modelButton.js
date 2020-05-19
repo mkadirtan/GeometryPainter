@@ -2,37 +2,40 @@ import { Button, Control } from '@babylonjs/gui';
 import config from '../../gui2D.config';
 import { activeModelObservable } from "../../../utilities/activeModel";
 
+let activeModel = undefined;
+activeModelObservable.add(e=>activeModel=e);
+
 export default function(param){
-    let result = new Button.CreateImageOnlyButton(param.name, param.image);
+    console.log(this);
+    this.image = param.image;
+    this.activeImage = param.activeImage;
+    this.model = param.model;
+    this.stack = param.stack
+    this.button = new Button.CreateImageOnlyButton(param.name, param.image);
+    this.button.width = 1.475 * config.controlBaseSize + "px";
+    this.button.height = 0.7 * config.controlBaseSize + "px";
+    this.button.cornerRadius = 7;
+    this.button.paddingBottom = config.controlPadding + "px";
+    this.button.paddingTop = config.controlPadding + "px";
+    this.button.paddingLeft = config.controlPadding + "px";
+    this.button.paddingRight = config.controlPadding + "px";
 
-    result.width = (param.width ? param.width * config.controlBaseSize : config.controlBaseSize) + "px";
-    result.height = (param.height ? param.height * config.controlBaseSize : config.controlBaseSize) + "px";
-    result.cornerRadius = 7;
-    result.paddingBottom = config.controlPadding + "px";
-    result.paddingTop = config.controlPadding + "px";
-    result.paddingLeft = config.controlPadding + "px";
-    result.paddingRight = config.controlPadding + "px";
-
-    result.metadata = { status: false }
-    if(param.activeImage) {
-        result.onPointerClickObservable.add(()=>{
-            if(result.metadata.status === false){
-                result.metadata.status = true;
-                result.children[0].source = param.activeImage
-            } else {
-                result.metadata.status = false;
-                result.children[0].source = param.image
-            }
-        })
-    }
-
-    if(param.onClick) result.onPointerClickObservable.add(param.onClick);
     if(param.stack.name === "leftPanel"){
-        result.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
+        this.button.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
     } else if(param.stack.name === "rightPanel") {
-        result.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT;
+        this.button.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT;
     }
 
-    param.stack.addControl(result);
-    return result;
+    this.stack.addControl(this.button);
+    this.button.onPointerClickObservable.add(()=>{
+        if(activeModel){
+            activeModel.dispose();
+        }
+        this.model();
+        setTimeout(()=>{this.button.children[0].source = this.activeImage},0)
+    });
+
+    activeModelObservable.add(()=>{
+        this.button.children[0].source = this.image;
+    })
 }
