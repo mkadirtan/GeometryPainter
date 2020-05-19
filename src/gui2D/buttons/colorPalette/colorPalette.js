@@ -3,6 +3,7 @@ import colorPanels from "../../panels/colorPanels";
 import { selectedFaceObservable } from "../../../utilities/selectFace";
 import { activeModelObservable } from "../../../utilities/activeModel";
 import colors from "./colors";
+import { drawingColorObservable } from "../selectDrawingColorButton";
 
 let selectedFace;
 selectedFaceObservable.add(e=>selectedFace = e);
@@ -20,8 +21,12 @@ function Palette(){
         }
     }
     this.status = true;
-    this.toggle = () => {
-        this.status = !this.status;
+    this.toggle = (status) => {
+        if(typeof status === typeof true){
+            this.status = status;
+        } else {
+            this.status = !this.status;
+        }
         this.colorPaletteButtons.forEach(buttonCol => {
             buttonCol.forEach(button=>{
                 button.isVisible = this.status;
@@ -38,8 +43,14 @@ function colorPaletteButton(color, stackPanelId){
         name: "colorPalette",
         image: color.image,
         onClick(){
-            activeModel.changeFaceColor(selectedFace, color.color);
+            if(colorPanels[0].metadata.activeButton === "changeFaceColor"){
+                activeModel.changeFaceColor(selectedFace, color.color);
+            } else if(colorPanels[0].metadata.activeButton === "selectDrawingColor"){
+                drawingColorObservable.notifyObservers(color.color.toHexString().substr(0, 7))
+            }
         },
+        width: 3/4,
+        height: 3/4,
         stack: colorPanels[stackPanelId],
     })
 }

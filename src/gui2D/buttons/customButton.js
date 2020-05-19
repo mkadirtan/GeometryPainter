@@ -4,12 +4,11 @@ import { activeModelObservable } from "../../utilities/activeModel";
 
 export default function(param){
     let result = new Button.CreateImageOnlyButton(param.name, param.image);
-
     result.width = (param.width ? param.width * config.controlBaseSize : config.controlBaseSize) + "px";
     result.height = (param.height ? param.height * config.controlBaseSize : config.controlBaseSize) + "px";
-    result.cornerRadius = 7;
-    result.paddingBottom = config.controlPadding + "px";
-    result.paddingTop = config.controlPadding + "px";
+    //result.cornerRadius = 2;
+    result.paddingBottom = (param.paddingBottom ? param.paddingBottom : 0) + config.controlPadding + "px";
+    result.paddingTop = (param.paddingTop ? param.paddingTop : 0) + config.controlPadding + "px";
     result.paddingLeft = config.controlPadding + "px";
     result.paddingRight = config.controlPadding + "px";
 
@@ -33,6 +32,12 @@ export default function(param){
         result.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT;
     } else {
         result.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_CENTER
+    }
+    if(typeof param.horizontalAlignment === typeof Control.HORIZONTAL_ALIGNMENT_CENTER){
+        result.horizontalAlignment = param.horizontalAlignment
+    }
+    if(typeof param.verticalAlignment === typeof Control.HORIZONTAL_ALIGNMENT_CENTER){
+        result.verticalAlignment = param.verticalAlignment
     }
 
     param.stack.addControl(result);

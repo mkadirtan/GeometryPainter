@@ -10,6 +10,7 @@ import Color22 from "../../../../media/images/Color22.png";
 import Color30 from "../../../../media/images/Color30.png";
 import Color31 from "../../../../media/images/Color31.png";
 import Color32 from "../../../../media/images/Color32.png";
+import placeholder from "../../../../media/images/placeholderImage.png";
 import { Color4 } from "@babylonjs/core";
 
 export default [

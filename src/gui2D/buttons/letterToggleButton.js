@@ -16,6 +16,7 @@ export function letterToggleButton(){
             isLettersActive = !isLettersActive;
             letterToggleObservable.notifyObservers(isLettersActive);
         },
+        paddingBottom: 4,
         stack: rightPanel
     })
 }

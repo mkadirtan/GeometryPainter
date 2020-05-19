@@ -2,10 +2,13 @@ import { Engine, Scene, ArcRotateCamera, DirectionalLight, Vector3, PointLight }
 import { Color3, Color4 } from "@babylonjs/core";
 
 const canvas = document.getElementById("renderCanvas");
-let engine;
+export let engine;
 
 if(canvas instanceof HTMLCanvasElement){
-    engine = new Engine(canvas, true, {stencil: true});
+    engine = new Engine(canvas, true, {
+        preserveDrawingBuffer: true,
+        stencil: true
+    });
 }
 
 function createScene(){
@@ -56,7 +59,6 @@ window.scene = scene;
 
 let followerLight = scene.getLightByName("followerLight");
 let camera = scene.activeCamera
-console.log(camera);
 
 scene.registerBeforeRender(()=>{
     followerLight.position = camera.position;

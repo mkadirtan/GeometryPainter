@@ -12,7 +12,7 @@ export default function(param){
     this.model = param.model;
     this.stack = param.stack
     this.button = new Button.CreateImageOnlyButton(param.name, param.image);
-    this.button.width = 2.1 * config.controlBaseSize + "px";
+    this.button.width = config.controlWideSize + "px";
     this.button.height = config.controlBaseSize + "px";
     this.button.cornerRadius = 7;
     this.button.paddingBottom = config.controlPadding + "px";
