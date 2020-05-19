@@ -1,6 +1,6 @@
 import customButton from "./customButton";
-import letterToggleImage from "../../media/images/firefox.png";
-import { rightPanel } from "./rightPanel";
+import letterToggleImage from "../../../media/images/letterToggleImage.png";
+import { rightPanel } from "../panels/rightPanel";
 import { Observable } from "@babylonjs/core";
 
 let isLettersActive = true;

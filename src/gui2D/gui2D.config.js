@@ -1,5 +1,5 @@
 export default {
-    controlBaseSize: 160,
-    controlPadding: 1,
+    controlBaseSize: 120,
+    controlPadding: 8,
     fontBaseSize: 24
 }

@@ -1,8 +1,8 @@
 import { scene } from "../scene";
 import { GizmoManager } from "@babylonjs/core";
-import customButton from "../gui2D/customButton";
+import customButton from "../gui2D/buttons/customButton";
 import gizmoToggleImage from "../../media/images/gizmoToggleImage.png"
-import { leftPanel } from "../gui2D/leftPanel";
+import { leftPanel } from "../gui2D/panels/leftPanel";
 
 let gizmoManager = new GizmoManager(scene);
 gizmoManager.scaleGizmoEnabled = true;
@@ -14,18 +14,20 @@ export function attachGizmoToModel(model){
     gizmoManager.attachableMeshes.push(model);
 }
 
-customButton({
-    name: "gizmoToggle",
-    stack: leftPanel,
-    image: gizmoToggleImage,
-    onClick(){
-        if(gizmoManager.scaleGizmoEnabled) {
-            gizmoManager.scaleGizmoEnabled = false;
-            gizmoManager.rotationGizmoEnabled = true;
-        } else if (gizmoManager.rotationGizmoEnabled) {
-            gizmoManager.rotationGizmoEnabled = false;
-        } else {
-            gizmoManager.scaleGizmoEnabled = true;
-        }
-    },
-})
+export function gizmoToggleButton(){
+    return customButton({
+        name: "gizmoToggle",
+        stack: leftPanel,
+        image: gizmoToggleImage,
+        onClick(){
+            if(gizmoManager.scaleGizmoEnabled) {
+                gizmoManager.scaleGizmoEnabled = false;
+                gizmoManager.rotationGizmoEnabled = true;
+            } else if (gizmoManager.rotationGizmoEnabled) {
+                gizmoManager.rotationGizmoEnabled = false;
+            } else {
+                gizmoManager.scaleGizmoEnabled = true;
+            }
+        },
+    })
+}

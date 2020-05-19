@@ -15,7 +15,7 @@ import {
     deactivateLetterChangeButtons,
 } from "./changeLetter";
 import drawText from "./drawText";
-import { letterToggleObservable } from "../gui2D/letterToggleButton";
+import { letterToggleObservable } from "../gui2D/buttons/letterToggleButton";
 
 
 export function createLetter(letter){
@@ -70,26 +70,24 @@ function attachChangeLetterPanel(letterPlane){
     )
 }
 
-
 // letter { letter, position }
-export function addLetters(letters, mesh){
-    letters.forEach(l=>{
+export function addLetters(model){
+    let letterPlanes = [];
+    model.letters.forEach(l=>{
         let letterPlane = createLetter(l.letter);
-        attachChangeLetterPanel(letterPlane);
-        letterToggleObservable.add(e=>{
-            console.log(e);
-            letterPlane.isVisible = !!e
-        })
+        letterPlanes.push(letterPlane);
+        //attachChangeLetterPanel(letterPlane); //feature Disabled
 
         let letterParent = attachLetterToTransformNode(letterPlane)
         letterParent.position = l.position;
-        letterParent.setParent(mesh);
+        letterParent.setParent(model.mesh);
 
-        mesh.onAfterWorldMatrixUpdateObservable.add(m=>{
+        model.mesh.onAfterWorldMatrixUpdateObservable.add(m=>{
             const mean = (m.scaling.x + m.scaling.y + m.scaling.z)/3;//(Math.max(m.scaling.x, m.scaling.y, m.scaling.z) + Math.min(m.scaling.x, m.scaling.y, m.scaling.z))/2;
             letterParent.scaling = new Vector3(
                 mean*(1/m.scaling.x), mean*(1/m.scaling.y), mean*(1/m.scaling.z)
             );
         })
     });
+    return letterPlanes;
 }

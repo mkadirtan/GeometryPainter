@@ -1,13 +1,20 @@
-import { edgesToggleObservable } from "../gui2D/edgesToggleButton";
+import { edgesToggleObservable } from "../gui2D/buttons/edgesToggleButton";
+import { activeModelObservable } from "./activeModel";
 
-export function attachEdgesToggleToModel(model){
-    edgesToggleObservable.add(e=>{
-        if(e){
-            model.enableEdgesRendering(0.999)
-            model.material.alpha = 0.5;
-        } else {
-            model.disableEdgesRendering()
-            model.material.alpha = 1;
-        }
-    })
-}
+let activeModel = undefined;
+activeModelObservable.add(e=>{
+    activeModel = e;
+    if(!activeModel) return;
+    activeModel.edgesWidth = 2;
+});
+
+edgesToggleObservable.add(e=>{
+    if(!activeModel) return;
+    if(e){
+        activeModel.mesh.enableEdgesRendering(0.999)
+        activeModel.mesh.visibility = 0.5;
+    } else {
+        activeModel.mesh.disableEdgesRendering()
+        activeModel.mesh.visibility = 1;
+    }
+})

@@ -3,7 +3,7 @@ import { Mesh, PlaneBuilder, TransformNode } from "@babylonjs/core";
 
 import manager from "../gui3D/manager";
 import drawText from "./drawText";
-import { letterToggleObservable } from "../gui2D/letterToggleButton";
+import { letterToggleObservable } from "../gui2D/buttons/letterToggleButton";
 
 function changeLetter(letterPlane, newLetter){
     let texture = letterPlane.material.diffuseTexture;
@@ -13,54 +13,69 @@ function changeLetter(letterPlane, newLetter){
     texture.update()
 }
 
-let rightPlane = PlaneBuilder.CreatePlane("rightPlane", {
-    size: 0.2,
-    sideOrientation: Mesh.DOUBLESIDE
-}, scene);
-rightPlane.billboardMode = TransformNode.BILLBOARDMODE_ALL;
+let rightButton = undefined;
+let leftButton = undefined;
 
-let rightButton = new MeshButton3D(rightPlane, "leftButton");
-manager.addControl(rightButton);
+function getRightButton(){
+    if(rightButton !== undefined) return rightButton;
+    let rightPlane = PlaneBuilder.CreatePlane("rightPlane", {
+        size: 0.2,
+        sideOrientation: Mesh.DOUBLESIDE
+    }, scene);
+    rightPlane.billboardMode = TransformNode.BILLBOARDMODE_ALL;
+    rightButton = new MeshButton3D(rightPlane, "leftButton");
+    manager.addControl(rightButton);
+    letterToggleObservable.add(e=>{
+        rightButton.isVisible = !!e;
+    })
+    return rightButton
+}
 
-let leftPlane = PlaneBuilder.CreatePlane("leftPlane", {
-    size: 0.2,
-    sideOrientation: Mesh.DOUBLESIDE
-}, scene);
-leftPlane.billboardMode = TransformNode.BILLBOARDMODE_ALL;
+function getLeftButton(){
+    if(leftButton !== undefined) return leftButton;
+    let leftPlane = PlaneBuilder.CreatePlane("leftPlane", {
+        size: 0.2,
+        sideOrientation: Mesh.DOUBLESIDE
+    }, scene);
+    leftPlane.billboardMode = TransformNode.BILLBOARDMODE_ALL;
+    leftButton = new MeshButton3D(leftPlane, "leftButton");
+    manager.addControl(leftButton);
+    letterToggleObservable.add(e=>{
+        leftButton.isVisible = !!e;
+    })
+    return leftButton
+}
 
-let leftButton = new MeshButton3D(leftPlane, "leftButton");
-manager.addControl(leftButton);
-
-letterToggleObservable.add(e=>{
-    rightButton.isVisible = !!e;
-    leftButton.isVisible = !!e;
-})
 //Start deactivated;
-deactivateLetterChangeButtons();
+//deactivateLetterChangeButtons(); //disabled Feature
 
 export function deactivateLetterChangeButtons(){
+    rightButton = getRightButton();
     rightButton.isVisible = false;
     rightButton.onPointerClickObservable.clear();
 
+    leftButton = getLeftButton();
     leftButton.isVisible = false;
     leftButton.onPointerClickObservable.clear();
 
     scene.meshes.forEach(m=>{
-        if(m.name === "letter"){
+        if(m.name === "letterPlane"){
             m.metadata.active = false;
         }
     })
 }
 
 export function activateLetterChangeButtons(letterPlane){
+    rightButton = getRightButton();
     rightButton.isVisible = true;
-
     rightButton.position.y = 0.2;
-    rightButton.linkToTransformNode(letterPlane.parent);
 
+    rightButton.linkToTransformNode(letterPlane.parent);
     rightButton.onPointerClickObservable.clear();
+
     rightButton.onPointerClickObservable.add(()=>{changeLetter(letterPlane, getNextLetter(letterPlane))})
 
+    leftButton = getLeftButton();
     leftButton.isVisible = true;
 
     leftButton.position.y = -0.2;
@@ -68,7 +83,6 @@ export function activateLetterChangeButtons(letterPlane){
 
     leftButton.onPointerClickObservable.clear();
     leftButton.onPointerClickObservable.add(()=>{changeLetter(letterPlane, getPrevLetter(letterPlane))})
-
 }
 
 function getNextLetter(letterPlane){

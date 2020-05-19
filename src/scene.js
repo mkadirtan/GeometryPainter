@@ -1,12 +1,17 @@
-import {Engine, Scene, ArcRotateCamera, DirectionalLight, Vector3, PointLight} from "@babylonjs/core";
+import { Engine, Scene, ArcRotateCamera, DirectionalLight, Vector3, PointLight } from "@babylonjs/core";
 import { Color3, Color4 } from "@babylonjs/core";
 
 const canvas = document.getElementById("renderCanvas");
-const engine = new Engine(canvas, true, {stencil: true});
+let engine;
+
+if(canvas instanceof HTMLCanvasElement){
+    engine = new Engine(canvas, true, {stencil: true});
+}
 
 function createScene(){
     let scene = new Scene(engine);
-    scene.clearColor = new Color4(0.45,0.65,0.92, 1);
+    //scene.clearColor = new Color4(0.45,0.65,0.92, 1);
+    scene.clearColor = new Color4(1,1,1,1);
 
     let camera = new ArcRotateCamera("camera", Math.PI/2, Math.PI/2, 6, Vector3.Zero(), scene);
     camera.wheelPrecision = 24;
@@ -37,7 +42,7 @@ function createScene(){
     let followerLight = new PointLight("followerLight", Vector3.Zero(), scene);
     followerLight.diffuse = diffuseColor
     followerLight.specular = new Color3(0.1, 0.1, 0.1)
-    followerLight.intensity = 0.6;
+    followerLight.intensity = 0.7;
 
     window.addEventListener("resize", function(){
         engine.resize();
@@ -51,6 +56,7 @@ window.scene = scene;
 
 let followerLight = scene.getLightByName("followerLight");
 let camera = scene.activeCamera
+console.log(camera);
 
 scene.registerBeforeRender(()=>{
     followerLight.position = camera.position;
