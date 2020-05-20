@@ -47,6 +47,7 @@ function colorPaletteButton(color, stackPanelId){
                 activeModel.changeFaceColor(selectedFace, color.color);
             } else if(colorPanels[0].metadata.activeButton === "selectDrawingColor"){
                 drawingColorObservable.notifyObservers(color.color.toHexString().substr(0, 7))
+                colorPalette.toggle(false);
             }
         },
         width: 3/4,

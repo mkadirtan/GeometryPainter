@@ -35,8 +35,8 @@ export default function() {
         scene.activeCamera.beta = Math.PI/2
 
         this.letterPlanes = addLetters(this);
-
         letterToggleObservable.add(e=>this.toggleLetters(e));
+        letterToggleObservable.notifyObservers(false);
         edgesToggleObservable.notifyObservers(false);
         //attachGizmoToModel(model); //disabled Feature
     }

@@ -8,7 +8,13 @@ let penSize = 3;
 penSizeObservable.add(e=>penSize=e);
 
 export function startDrawing() {
-    let drawCanvas = document.createElement("CANVAS");
+    if(document.getElementById("drawCanvas")){
+        endDrawing();
+        return;
+    }
+
+    let drawCanvas;
+    drawCanvas = document.createElement("CANVAS");
     drawCanvas.id = "drawCanvas";
     drawCanvas.style.position = "absolute";
     document.body.prepend(drawCanvas);
@@ -51,21 +57,38 @@ export function startDrawing() {
             mouse.y = e.clientY;
         }, false);
 
+        drawCanvas.addEventListener('touchmove', function (e) {
+            mouse.x = e.touches[0].clientX - xOffset;
+            mouse.y = e.touches[0].clientY;
+        }, false);
+
         drawCanvas.addEventListener('mousedown', function () {
             ctx.beginPath();
             ctx.moveTo(mouse.x, mouse.y);
             drawCanvas.addEventListener('mousemove', onPaint, false);
         }, false);
 
+        drawCanvas.addEventListener('touchstart', function (e) {
+            mouse.x = e.touches[0].clientX - xOffset;
+            mouse.y = e.touches[0].clientY;
+            ctx.beginPath();
+            ctx.moveTo(mouse.x, mouse.y);
+            drawCanvas.addEventListener('touchmove', onPaint, false);
+        }, false);
+
         drawCanvas.addEventListener('mouseup', function () {
             drawCanvas.removeEventListener('mousemove', onPaint, false);
+        }, false);
+
+        drawCanvas.addEventListener('touchcancel', function () {1
+            drawCanvas.removeEventListener('touchmove', onPaint, false);
         }, false);
     }
 }
 
 export function endDrawing(){
-    let drawCanvas = document.getElementById("drawCanvas");
-    if(drawCanvas){
+    while(document.getElementById("drawCanvas")) {
+        let drawCanvas = document.getElementById("drawCanvas");
         document.body.removeChild(drawCanvas);
     }
 }

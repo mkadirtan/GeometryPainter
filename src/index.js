@@ -32,14 +32,14 @@ import {selectPenSizeButton} from "./gui2D/buttons/selectPenSizeButton";
 
 //modelPanel
 boxButton();
-//rectangleBoxButton();
-//fiveCyclinderButton();
-//sixCyclinderButton();
+rectangleBoxButton();
+fiveCyclinderButton();
+sixCyclinderButton();
 cyclinderButton();
-//coneButton();
-//fivePyramidButton();
-//threePyramidButton();
-//fourPyramidButton();
+coneButton();
+fivePyramidButton();
+threePyramidButton();
+fourPyramidButton();
 threeCyclinderButton();
 
 //utilitiesPanel

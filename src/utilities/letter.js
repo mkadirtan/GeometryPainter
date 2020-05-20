@@ -20,7 +20,7 @@ import { letterToggleObservable } from "../gui2D/buttons/letterToggleButton";
 
 export function createLetter(letter){
     let letterPlane = PlaneBuilder.CreatePlane("letterPlane",{
-        size: 0.1,
+        size: 0.2,
         sideOrientation: Mesh.DOUBLESIDE
     }, scene);
 

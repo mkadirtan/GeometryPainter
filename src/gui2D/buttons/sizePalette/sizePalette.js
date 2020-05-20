@@ -36,6 +36,7 @@ function sizePaletteButton(size){
         image: size.image,
         onClick(){
             colorPalette.toggle(false);
+            sizePalette.toggle(false);
             penSizeObservable.notifyObservers(size.size)
         },
         width: 1.2,

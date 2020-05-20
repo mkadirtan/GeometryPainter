@@ -12,14 +12,14 @@ export function topRightLogoButton(){
         onClick(){
 
         },
-        paddingTop: 6,
-        width: 2.5,
-        height: 0.9,
+        width: 1.9,
+        height: 0.415,
         stack: advancedTexture,
         horizontalAlignment: Control.HORIZONTAL_ALIGNMENT_RIGHT,
         verticalAlignment: Control.VERTICAL_ALIGNMENT_TOP
     });
     _button.isEnabled = false;
+    _button.top = "20px";
 
     let _placeholder = customButton({
         name: "placeHolder",

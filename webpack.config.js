@@ -4,10 +4,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
-    mode: 'production',
-    //devtool: 'inline-source-map',
+    mode: 'development',
+    devtool: 'inline-source-map',
     devServer: {
-        contentBase: '/',
+        //contentBase: '/',
         public: '192.168.1.46:8080',
         port: '8080',
         host: '192.168.1.46',

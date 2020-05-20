@@ -3,7 +3,7 @@ import letterToggleImage from "../../../media/images/letterToggleImage.png";
 import { rightPanel } from "../panels/rightPanel";
 import { Observable } from "@babylonjs/core";
 
-let isLettersActive = true;
+let isLettersActive = false;
 export let letterToggleObservable = new Observable(o=>{
     letterToggleObservable.notifyObserver(o, isLettersActive)
 });

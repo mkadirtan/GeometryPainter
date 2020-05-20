@@ -15,7 +15,6 @@ export function edgesToggleButton(){
         image: edgesToggleImage,
         onClick(){
             isEdgesActive = !isEdgesActive;
-            console.log(isEdgesActive);
             edgesToggleObservable.notifyObservers(isEdgesActive)
         },
         stack: rightPanel

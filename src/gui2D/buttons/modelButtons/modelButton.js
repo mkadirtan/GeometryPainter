@@ -6,7 +6,6 @@ let activeModel = undefined;
 activeModelObservable.add(e=>activeModel=e);
 
 export default function(param){
-    console.log(this);
     this.image = param.image;
     this.activeImage = param.activeImage;
     this.model = param.model;
