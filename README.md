@@ -33,6 +33,6 @@ To build the project
 
 The product and the digital material is designed by Haydar Aydoğdu, and he hired me for writing the software.
 
-This project is published with the approval of Haydar Aydoğdu.
+This project is published with permission of Haydar Aydoğdu.
 
 As stated in the LICENSE, you may use and redistribute the source code and materials. But, you need to give attribution, and you must re-distribute modified source code and designs under the same LICENSE.
